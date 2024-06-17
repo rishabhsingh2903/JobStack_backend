@@ -2,7 +2,9 @@
 
 JobStack is a web application built to help users track their job applications easily. It provides a user-friendly interface for managing applications, integrating authentication and authorization for secure access.
 
-![JobStack Preview](path_to_preview_image)
+<img width="1470" alt="Screenshot 2024-06-17 at 1 59 10 AM" src="https://github.com/rishabhsingh2903/JobStack_backend/assets/47890782/75c06b04-2fc9-4808-9462-46fe12c51911">
+<img width="1470" alt="Screenshot 2024-06-17 at 1 58 28 AM" src="https://github.com/rishabhsingh2903/JobStack_backend/assets/47890782/b1c47a2f-eb88-4c82-87c3-c7932cfac31a">
+<img width="1470" alt="Screenshot 2024-06-17 at 1 57 21 AM" src="https://github.com/rishabhsingh2903/JobStack_backend/assets/47890782/329db08c-7d28-4c60-b31e-8e10f8bb8008">
 
 ## Features
 
