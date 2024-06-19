@@ -5,6 +5,8 @@ const app = express();
 const mongoose = require("mongoose");
 const helmet = require("helmet");
 const morgan = require("morgan");
+const cors = require('cors');
+app.use(cors());
 const userRoute = require("./Routes/users");
 const authRoute = require("./Routes/auth");
 const appRoute = require("./Routes/applications");

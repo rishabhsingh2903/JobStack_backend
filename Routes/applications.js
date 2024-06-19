@@ -13,7 +13,7 @@ router.post("/add",async(req,res)=>{
             user:req.userId,
         });
         const saveApplication = await newApplication.save();
-        res.status(500).json({message:"successfully saved the application"});
+        res.status(200).json({message:"successfully saved the application"});
     }catch(err){
         res.status(500).json({message:"server error ", err});
     }
@@ -32,22 +32,46 @@ router.get("/",async (req,res)=>{
 
 
 //update application
-router.put("/edit",async(req,res)=>{
-    const {jobTitle,companyName,description,status} = req.body;
-    try{
-        const updateApplication = await Application.findByIdAndUpdate(req.userId,{
-            jobTitle,
-            companyName,
-            description,
-            status
-        },{ new: true, runValidators: true });
+// router.put("/edit", async (req, res) => {
+//     const { id, status } = req.body;
+//     console.log(id);
+//     console.log(status);
+//     try {
+//         const updateApplication = await Application.findByIdAndUpdate(
+//             id,
+//             { status },
+//             { new: true, runValidators: true }
+//         );
 
-        if (!updateApplication) {
-            return res.status(404).json({ message: "Application not found" });
+//         if (!updateApplication) {
+//             return res.status(404).json({ message: "Application not found" });
+//         }
+//         res.status(200).json("Successfully updated the application");
+//     } catch (err) {
+//         res.status(500).json({ message: 'Server error', err });
+//     }
+// });
+router.put('/edit', async (req, res) => {
+    const { id, status } = req.body;
+
+    try {
+        // Step 1: Fetch the application by ID
+        const application = await Application.findById(id);
+
+        if (!application) {
+            return res.status(404).json({ message: 'Application not found' });
         }
-        res.status(200).json("succesfully updated the application");
-    }catch(err){
-        res.status(500).json({ message: 'Server error', err});
+
+        // Step 2: Update the application fields
+        application.status = status; // Update the status field
+
+        // Step 3: Save the updated application
+        const updatedApplication = await application.save();
+
+        res.status(200).json(updatedApplication);
+    } catch (err) {
+        console.error('Error updating application:', err);
+        res.status(500).json({ message: 'Server error', error: err });
     }
 });
 
@@ -76,7 +100,6 @@ router.get("/search", async (req, res) => {
 
 router.delete("/delete", async (req, res) => {
     const { ids } = req.body;
-
     if (!Array.isArray(ids) || ids.length === 0) {
         return res.status(400).json({ message: "No application Id provided" });
     }
